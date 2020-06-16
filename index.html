@@ -21,15 +21,19 @@
                     vendorId: 0xc1a5
                 }];
                 console.log("starting button event")
+                var device
                 //let device = await navigator.usb.requestDevice({ filters: [] })
-                navigator.usb.requestDevice({ filters: filters })
-                    .then(device=>{
+                navigator.usb.requestDevice({ filters: [] })
+                    .then(selectedDevice=>{
+                        device = selectedDevice
                         console.log("device requested")
                         devInfo.innerHTML+="Device name: "+device.productName+"<br>";
                         devInfo.innerHTML+="Manufacturer: "+ device.manufacturerName+"<br>";
-                        device.open();
+                        console.log(device)
+                        return device.open();
                     })
                     .then(device=>{
+                        console.log(device)
                         console.log("device opened")
                         devInfo.innerHTML+="Openned<br>";
                         device.selectConfiguration(1);
@@ -44,6 +48,7 @@
                     })
                     .catch(function(e){
                         devInfo.innerHTML+="Error<br>";
+                        console.log("")
                         console.log(e)
                     });
                     console.log("finishing button event")
