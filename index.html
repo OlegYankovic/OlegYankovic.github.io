@@ -1,1 +1,76 @@
-Hello World
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <button id="Button">Show USB</button>
+    <button id="Promise">Promise</button>
+    <div id="devInfo"></div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script>
+        window.addEventListener("load", function(){
+            let devInfo = document.querySelector("#devInfo")
+            document.querySelector("#Button").onclick = function(){
+                devInfo.innerHTML = ""
+                let filters = [{
+                    vendorId: 0xc1a5
+                }];
+                console.log("starting button event")
+                //let device = await navigator.usb.requestDevice({ filters: [] })
+                navigator.usb.requestDevice({ filters: filters })
+                    .then(device=>{
+                        console.log("device requested")
+                        devInfo.innerHTML+="Device name: "+device.productName+"<br>";
+                        devInfo.innerHTML+="Manufacturer: "+ device.manufacturerName+"<br>";
+                        device.open();
+                    })
+                    .then(device=>{
+                        console.log("device opened")
+                        devInfo.innerHTML+="Openned<br>";
+                        device.selectConfiguration(1);
+                    })
+                    .then(device=>{
+                        console.log("device selected configuration")
+                        devInfo.innerHTML+="Configuration<br>";
+                        device.claimInterface(0)
+                    })
+                    .then(device=>{
+                        console.log("device interface claimed")
+                    })
+                    .catch(function(e){
+                        devInfo.innerHTML+="Error<br>";
+                        console.log(e)
+                    });
+                    console.log("finishing button event")
+            }
+            document.querySelector("#Promise").onclick = function(){
+                console.log("starting button event")
+                var promise = new Promise((resolve,reject)=> {
+                        console.log("executing promise")
+                        resolve("result")
+                    })
+                console.log("promise created")    
+                promise.then(result=>{
+                        console.log("then: "+result)
+                        return "another result"
+                    })
+                    .then(resultt=>{
+                        console.log("then: "+resultt)
+                        throw "error"
+                    })
+                    .catch(err=>{
+                        console.log("error: "+err)
+                    })
+                console.log("finishing button event")
+            }
+        })
+    </script> -->
+  </body>
+</html>
